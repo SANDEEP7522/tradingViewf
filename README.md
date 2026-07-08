@@ -71,10 +71,10 @@ src/
 
 | Path | Page | Status |
 |---|---|---|
-| `/` | Dashboard | ✅ (stats Phase 2 me) |
-| `/data` | Data Explorer | 🚧 Phase 3 |
-| `/chart` | Candlestick Chart | 🚧 Phase 4 |
-| `/option-chain` | Option Chain | 🚧 Phase 5 |
+| `/` | Dashboard — stat cards + name/type breakdown | ✅ Phase 2 |
+| `/data` | Data Explorer — filter bar + table + pagination | ✅ Phase 3 |
+| `/chart` | Candlestick Chart — candles + volume (lightweight-charts) | ✅ Phase 4 |
+| `/option-chain` | Option Chain — CE/PE strike-wise + ATM highlight | ✅ Phase 5 |
 
 ## Backend API
 
