@@ -1,20 +1,18 @@
 import { Routes, Route } from 'react-router-dom'
 import Layout from '@/components/Layout'
-import Placeholder from '@/components/Placeholder'
-import Home from '@/pages/Home'
-import DataExplorer from '@/pages/DataExplorer'
-import ChartPage from '@/pages/ChartPage'
-import OptionChainPage from '@/pages/OptionChainPage'
+import Dashboard from '@/pages/Dashboard'
 
 function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
-        <Route path="/" element={<Home />} />
-        <Route path="/data" element={<DataExplorer />} />
-        <Route path="/chart" element={<ChartPage />} />
-        <Route path="/option-chain" element={<OptionChainPage />} />
-        <Route path="*" element={<Placeholder title="404 — Not Found" />} />
+        {/* saare routes ek hi single-page Dashboard render karte hain —
+            URL badalta hai (route kaam karta hai) par page same rehta hai */}
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/data" element={<Dashboard />} />
+        <Route path="/chart" element={<Dashboard />} />
+        <Route path="/option-chain" element={<Dashboard />} />
+        <Route path="*" element={<Dashboard />} />
       </Route>
     </Routes>
   )

@@ -23,6 +23,16 @@ const OptionChainPage = () => {
     setExpiry('')
   }, [name])
 
+  // default: pehla index auto-select
+  useEffect(() => {
+    if (!name && names?.length) setName(names[0].name)
+  }, [names, name])
+
+  // default: expiries load hote hi pehli expiry select
+  useEffect(() => {
+    if (!expiry && expiries?.length) setExpiry(expiries[0])
+  }, [expiries, expiry])
+
   const ready = Boolean(name && expiry)
 
   const { data, loading, error, refetch } = useFetch(

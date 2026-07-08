@@ -67,9 +67,13 @@ src/
 
 `@` alias `src/` par set hai (`vite.config.ts`) → `import x from '@/components/...'`.
 
-## Routes
+## Routes (single-page)
 
-| Path | Page | Status |
+Sab kuch **ek hi scroll page** par hai. Har route wahi single-page Dashboard render
+karta hai — nav click par URL badalta hai + us section par smooth-scroll hota hai,
+aur scroll karte waqt URL apne aap sync hota hai (scrollspy). Route shareable hai.
+
+| Path | Section | Status |
 |---|---|---|
 | `/` | Dashboard — stat cards + name/type breakdown | ✅ Phase 2 |
 | `/data` | Data Explorer — filter bar + table + pagination | ✅ Phase 3 |

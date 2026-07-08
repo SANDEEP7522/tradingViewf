@@ -22,6 +22,18 @@ const ChartPage = () => {
     setSymbol('')
   }, [name])
 
+  // default: pehla index auto-select
+  useEffect(() => {
+    if (!name && names?.length) setName(names[0].name)
+  }, [names, name])
+
+  // default: symbols load hote hi pehla FUT (ya pehla symbol) select
+  useEffect(() => {
+    if (!symbol && symbols?.length) {
+      setSymbol(symbols.find((s) => s.endsWith('FUT')) ?? symbols[0])
+    }
+  }, [symbols, symbol])
+
   const { data, loading, error, refetch } = useFetch(
     () => (symbol ? getSymbolSeries(symbol, 500) : Promise.resolve(null)),
     [symbol],
