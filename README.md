@@ -1,75 +1,86 @@
-# React + TypeScript + Vite
+# Frontend — NFO Data Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+NSE F&O (NFO) index options/futures data ka dashboard.
+Backend (`/backend`) ke Express + SQLite API ko consume karta hai.
 
-Currently, two official plugins are available:
+## Tech Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **React 19** + **TypeScript**
+- **Vite 8** (build tool)
+- **Tailwind CSS 4** (styling)
+- **react-router-dom 7** (routing)
+- **axios** (API calls)
+- **lightweight-charts** (candlestick charts)
 
-## React Compiler
+## Prerequisites
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+Backend chalna chahiye (default `http://localhost:5000`):
+```bash
+cd ../backend && npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Setup
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm install
+npm run dev        # dev server (default http://localhost:5173)
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+Baaki scripts:
+```bash
+npm run build      # production build (tsc + vite)
+npm run preview    # build ko locally serve
+npm run lint       # eslint
+npm run format     # prettier
+```
+
+## Environment (`.env`)
 
 ```
+VITE_API_URL=http://localhost:5000/api
+```
+`.env` gitignored hai. Naye machine par ye file banani padegi (ya `.env.example` copy).
+
+## Project Structure
+
+```
+src/
+├── main.tsx                 # entry (BrowserRouter)
+├── App.tsx                  # routes (Layout ke andar)
+├── components/
+│   ├── Layout.tsx           # navbar + <Outlet/>
+│   └── Placeholder.tsx      # temp — Phase 2-5 me replace hoga
+├── pages/
+│   └── Home.tsx             # dashboard (/)
+├── services/
+│   └── api.ts               # axios instance (baseURL + error interceptor)
+├── types/
+│   └── nfo.ts               # backend response types
+├── hooks/                   # (Phase 1)
+├── utils/                   # (Phase 6)
+└── styles/index.css         # tailwind
+```
+
+`@` alias `src/` par set hai (`vite.config.ts`) → `import x from '@/components/...'`.
+
+## Routes
+
+| Path | Page | Status |
+|---|---|---|
+| `/` | Dashboard | ✅ (stats Phase 2 me) |
+| `/data` | Data Explorer | 🚧 Phase 3 |
+| `/chart` | Candlestick Chart | 🚧 Phase 4 |
+| `/option-chain` | Option Chain | 🚧 Phase 5 |
+
+## Backend API
+
+Base: `http://localhost:5000/api` — details ke liye `../backend/README.md` dekho.
+
+Frontend jo endpoints use karta hai:
+`/nfo/stats`, `/nfo/names`, `/nfo/symbols`, `/nfo/expiries`,
+`/nfo`, `/nfo/symbol/:symbol`, `/nfo/option-chain`.
+
+## Roadmap
+
+Implementation task breakdown `TASKS.md` me hai (gitignored — local notes).
+Phase 0 (foundation) complete: API client, types, routing, layout.
