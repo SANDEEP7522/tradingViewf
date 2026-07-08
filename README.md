@@ -53,10 +53,14 @@ src/
 ├── pages/
 │   └── Home.tsx             # dashboard (/)
 ├── services/
-│   └── api.ts               # axios instance (baseURL + error interceptor)
+│   ├── api.ts               # axios instance (baseURL + error interceptor)
+│   └── nfoService.ts        # typed API calls (har endpoint)
 ├── types/
 │   └── nfo.ts               # backend response types
-├── hooks/                   # (Phase 1)
+├── hooks/
+│   ├── useFetch.ts          # generic loading/error/data hook
+│   ├── useNames.ts          # index names (dropdowns)
+│   └── useExpiries.ts       # expiry dates (dropdowns)
 ├── utils/                   # (Phase 6)
 └── styles/index.css         # tailwind
 ```
@@ -80,7 +84,3 @@ Frontend jo endpoints use karta hai:
 `/nfo/stats`, `/nfo/names`, `/nfo/symbols`, `/nfo/expiries`,
 `/nfo`, `/nfo/symbol/:symbol`, `/nfo/option-chain`.
 
-## Roadmap
-
-Implementation task breakdown `TASKS.md` me hai (gitignored — local notes).
-Phase 0 (foundation) complete: API client, types, routing, layout.
